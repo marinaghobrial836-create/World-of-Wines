@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>World of Wine | 10th St & Avenue C</title>
+  <meta name="description" content="World of Wine — 10th St & Avenue C Wine & Liquor">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar__inner">
+      <span>159 Loisaida Ave, New York, NY 10009</span>
+      <span>•</span>
+      <a href="tel:+12129958200">(212) 995-8200</a>
+      <span>•</span>
+      <span class="status">Open daily 1 PM–midnight</span>
+    </div>
+  </div>
+
+  <header class="navbar">
+    <a class="brand" href="#">
+      <span class="brand-mark">W<span>O</span>W</span>
+      <span class="brand-text">World<br>of Wine</span>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#shop">Shop</a>
+      <div class="dropdown">
+        <button class="dropdown__button" type="button" aria-expanded="false">Categories ▾</button>
+        <div class="dropdown__menu">
+          <a href="#shop" data-category-link="Wine">Wine</a>
+          <a href="#shop" data-category-link="Whiskey">Whiskey</a>
+          <a href="#shop" data-category-link="Tequila">Tequila</a>
+          <a href="#shop" data-category-link="Vodka">Vodka</a>
+          <a href="#shop" data-category-link="Gin">Gin</a>
+          <a href="#shop" data-category-link="Rum">Rum</a>
+          <a href="#shop" data-category-link="Beer">Beer</a>
+          <a href="#shop" data-category-link="Brandy & Cognac">Brandy & Cognac</a>
+          <a href="#shop" data-category-link="Liqueurs">Liqueurs</a>
+          <a href="#shop" data-category-link="Ready-to-Drink / Canned">Ready-to-Drink / Canned</a>
+        </div>
+      </div>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <button id="cartButton" class="cart-button" type="button" aria-label="Open shopping cart">
+        Cart <span id="cartCount" class="cart-count">0</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero__glow"></div>
+      <div class="hero__content">
+        <p class="eyebrow">10th St & Avenue C</p>
+        <h2>Discover your<br>next <em>favorite</em> bottle.</h2>
+        <p class="hero__copy">A neighborhood wine & liquor shop bringing together everyday favorites, special bottles, and something new to discover.</p>
+        <a class="button button--primary hero__button" href="#shop">Shop the collection</a>
+      </div>
+      <div class="hero__bottle" aria-hidden="true">
+        <div class="hero-bottle__neck"></div>
+        <div class="hero-bottle__body"><span>WOW<small>WORLD<br>OF WINE</small></span></div>
+      </div>
+    </section>
+
+    <section class="quick-info" aria-label="Store information">
+      <div><strong>Local & Convenient</strong><span>159 Loisaida Ave · New York, NY 10009</span></div>
+      <div><strong>Open Daily</strong><span>1 PM–midnight</span></div>
+      <div><strong>Call the Shop</strong><span><a href="tel:+12129958200">(212) 995-8200</a></span></div>
+    </section>
+
+    <section id="shop" class="shop-section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">The collection</p>
+          <h2>Shop bottles</h2>
+        </div>
+        <p class="section-note">Search, filter, and add bottles to your cart.</p>
+      </div>
+
+      <div id="sheetStatus" class="sheet-status" hidden></div>
+
+      <div class="shop-layout">
+        <aside class="filters">
+          <div class="filter-head">
+            <h3>Filter</h3>
+            <button id="clearFilters" type="button">Clear all</button>
+          </div>
+          <form id="filterForm">
+            <label class="filter-label" for="categoryFilter">Category</label>
+            <select id="categoryFilter"><option value="All">All categories</option></select>
+
+            <label class="filter-label" for="typeFilter">Type</label>
+            <select id="typeFilter"><option value="All">All types</option></select>
+
+            <label class="filter-label" for="brandFilter">Brand</label>
+            <select id="brandFilter"><option value="All">All brands</option></select>
+
+            <label class="filter-label" for="searchInput">Search</label>
+            <input id="searchInput" type="search" placeholder="Brand or product">
+
+            <label class="filter-label">Price</label>
+            <div class="price-row">
+              <input id="minPrice" type="number" min="0" step="0.01" placeholder="Min">
+              <span>–</span>
+              <input id="maxPrice" type="number" min="0" step="0.01" placeholder="Max">
+            </div>
+            <p id="filterError" class="filter-error" hidden>Minimum price cannot be greater than maximum price.</p>
+
+            <label class="filter-label" for="sortFilter">Sort</label>
+            <select id="sortFilter">
+              <option value="featured">Featured</option>
+              <option value="price-low">Price: low to high</option>
+              <option value="price-high">Price: high to low</option>
+              <option value="name">Name</option>
+            </select>
+
+            <label class="stock-filter"><input id="inStockFilter" type="checkbox"> In stock only</label>
+            <button id="applyFilters" class="button button--primary filter-submit" type="submit">Apply filters</button>
+          </form>
+        </aside>
+
+        <section>
+          <div id="resultsCount" class="results-bar">Loading products…</div>
+          <div id="productGrid" class="product-grid"></div>
+          <div id="emptyState" class="empty-state" hidden>
+            <h3>No products found</h3>
+            <p>Try changing your filters or search.</p>
+          </div>
+        </section>
+      </div>
+      <p id="statusMessage" class="sr-only" aria-live="polite"></p>
+    </section>
+
+    <section id="about" class="about-section">
+      <div>
+        <p class="eyebrow">Our shop</p>
+        <h2>Neighborhood bottles, thoughtfully chosen.</h2>
+      </div>
+      <div class="about-details">
+        <p>World of Wine is your neighborhood destination at 10th St & Avenue C. Browse wines, spirits, beer, and more, then find a bottle that fits the occasion.</p>
+        <p>Inventory and prices can be updated from the connected product sheet without changing the website code.</p>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+      <div>
+        <p class="eyebrow">Visit us</p>
+        <h2>Come by the shop.</h2>
+      </div>
+      <div class="contact-card">
+        <p><strong>World of Wine</strong></p>
+        <p>159 Loisaida Ave<br>New York, NY 10009</p>
+        <p><a href="tel:+12129958200">(212) 995-8200</a></p>
+        <p>Open daily · 1 PM–midnight</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div><strong>WORLD OF WINE</strong><span>10th St & Avenue C</span></div>
+    <div><span>© <span id="year"></span> World of Wine</span><span>21+ only. Please drink responsibly.</span></div>
+  </footer>
+
+  <div id="drawerBackdrop" class="drawer-backdrop" hidden></div>
+  <aside id="cartDrawer" class="cart-drawer" aria-hidden="true" aria-label="Shopping cart">
+    <div class="drawer-header">
+      <h2>Cart</h2>
+      <button id="closeCart" class="close-button" type="button" aria-label="Close cart">×</button>
+    </div>
+    <div id="cartItems" class="cart-items"></div>
+    <div class="cart-footer">
+      <div class="subtotal"><span>Subtotal</span><strong id="cartSubtotal">$0.00</strong></div>
+      <p class="cart-note">This website checkout is a free front-end demo. No payment is processed.</p>
+      <button id="checkoutButton" class="button button--primary full-width" type="button" disabled>Checkout</button>
+    </div>
+  </aside>
+
+  <div id="checkoutModal" class="modal-backdrop" hidden>
+    <div class="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+      <button id="closeCheckout" class="close-button modal-close" type="button" aria-label="Close checkout">×</button>
+      <div id="checkoutFormView">
+        <p class="eyebrow">Checkout</p>
+        <h2 id="checkoutTitle">Complete your order</h2>
+        <form id="checkoutForm">
+          <div class="form-grid">
+            <label>First name<input name="firstName" required></label>
+            <label>Last name<input name="lastName" required></label>
+          </div>
+          <label>Email<input type="email" name="email" required></label>
+          <label>Phone<input type="tel" name="phone" required></label>
+          <label>Order notes<textarea name="notes" rows="3" style="width:100%;padding:12px;border:1px solid #dcd2c5;border-radius:6px;resize:vertical"></textarea></label>
+          <div class="payment-notice"><strong>Demo checkout</strong><span>No credit card is collected or charged by this free version.</span></div>
+          <label class="checkbox-label"><input type="checkbox" required> I confirm I am 21 or older and understand that a valid ID may be required.</label>
+          <p class="checkout-disclaimer">Submitting this form creates a demonstration order number only. Connect a compliant payment/order provider before using this for real alcohol sales.</p>
+          <button class="button button--primary full-width" type="submit">Place demo order</button>
+        </form>
+      </div>
+      <div id="thankYouView" class="thank-you" hidden>
+        <div class="thank-icon">✓</div>
+        <p class="eyebrow">Thank you</p>
+        <h2>Order received</h2>
+        <p>Your demonstration order has been created.</p>
+        <p id="orderNumber" class="order-number"></p>
+        <button id="continueShopping" class="button button--primary" type="button">Continue shopping</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
